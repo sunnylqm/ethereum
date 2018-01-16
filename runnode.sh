@@ -33,6 +33,7 @@ docker run $DETACH_FLAG --name $CONTAINER_NAME \
     -v $DATA_ROOT:/root/.ethereum \
     -v $DATA_HASH:/root/.ethash \
     -v $(pwd)/genesis.json:/opt/genesis.json \
+    -v $(pwd)/password.json:/opt/password.json \
     $RPC_PORTMAP \
     --network ethereum \
     $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=4 --maxpeers=3 ${@:2}
