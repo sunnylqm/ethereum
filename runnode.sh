@@ -1,5 +1,5 @@
 #!/bin/bash
-IMGNAME="ethereum/client-go"
+IMGNAME="ethereum/client-go:v1.7.3"
 NODE_NAME=$1
 NODE_NAME=${NODE_NAME:-"node1"}
 DETACH_FLAG=${DETACH_FLAG:-"-d"}
@@ -34,7 +34,5 @@ docker run $DETACH_FLAG --name $CONTAINER_NAME \
     -v $DATA_HASH:/root/.ethash \
     -v $(pwd)/genesis.json:/opt/genesis.json \
     $RPC_PORTMAP \
-    $IMGNAME $RPC_ARG --cache=512 --verbosity=4 --maxpeers=3 ${@:2}
-
-
-# $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=4 --maxpeers=3 ${@:2}
+    --network ethereum \
+    $IMGNAME --bootnodes=$BOOTNODE_URL $RPC_ARG --cache=512 --verbosity=4 --maxpeers=3 ${@:2}
